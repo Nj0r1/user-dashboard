@@ -7,10 +7,19 @@
     </div>
   </nav>
   
-  <!-- Main Content: flex-grow-1 makes this section expand to fill available space -->
+  
   <div class="flex-grow-1">
     <router-outlet></router-outlet>
   </div>
+
+  <!-- Main Content: flex-grow-1 makes this section expand to fill available space -->
+  <div class="container my-4">
+    <!-- Other dashboard content can go here, e.g., cards, tables, etc. -->
+    
+    <!-- Include the counter component for state management demonstration -->
+    <app-counter></app-counter>
+  </div>
+  
   
   <!-- Footer -->
   <footer class="bg-dark text-white text-center py-3">

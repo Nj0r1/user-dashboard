@@ -1,0 +1,12 @@
+<div class="card text-center my-3">
+    <div class="card-body">
+      <h4 class="card-title">Counter</h4>
+      <!-- Display the current counter value -->
+      <p class="card-text display-4">{{ counter$ | async }}</p>
+      <div class="btn-group" role="group" aria-label="Counter Controls">
+        <button type="button" class="btn btn-success" (click)="increment()">Increment</button>
+        <button type="button" class="btn btn-danger" (click)="decrement()">Decrement</button>
+        <button type="button" class="btn btn-secondary" (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </div>

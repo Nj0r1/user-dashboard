@@ -1,31 +1,101 @@
-<div class="container my-5">
-    <h1 class="mb-4">Create New User</h1>
-    <form #createForm="ngForm" (ngSubmit)="createUser()">
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newUser.name" required />
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Create New User</h2>
+
+  <!-- Reactive Form for Creating a New User -->
+  <form [formGroup]="newUserForm" (ngSubmit)="createUser()">
+    
+    <!-- Name Field -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+      <input 
+        type="text" 
+        id="name" 
+        formControlName="name" 
+        class="form-control" 
+        placeholder="Enter your name">
+      <div *ngIf="newUserForm.get('name')?.touched && newUserForm.get('name')?.invalid" class="text-danger">
+        Name is required.
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" name="email" class="form-control" [(ngModel)]="newUser.email" required />
+    </div>
+
+    <!-- Email Field -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email" 
+        class="form-control" 
+        placeholder="Enter your email">
+      <div *ngIf="newUserForm.get('email')?.touched && newUserForm.get('email')?.invalid" class="text-danger">
+        <div *ngIf="newUserForm.get('email')?.errors?.['required']">Email is required.</div>
+        <div *ngIf="newUserForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
       </div>
-      <div class="mb-3">
-        <label for="phone" class="form-label">Phone</label>
-        <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="newUser.phone" />
+    </div>
+
+    <!-- Phone Field -->
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+      <input 
+        type="text" 
+        id="phone" 
+        formControlName="phone" 
+        class="form-control" 
+        placeholder="Enter your phone number">
+      <div *ngIf="newUserForm.get('phone')?.touched && newUserForm.get('phone')?.invalid" class="text-danger">
+        <div *ngIf="newUserForm.get('phone')?.errors?.['required']">Phone number is required.</div>
+        <div *ngIf="newUserForm.get('phone')?.errors?.['minlength']">
+          Phone number must be at least 10 digits.
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="address" class="form-label">Address</label>
-        <input type="text" id="address" name="address" class="form-control" [(ngModel)]="newUser.address!.street" placeholder="Street" required />
-        <input type="text" id="suite" name="suite" class="form-control mt-2" [(ngModel)]="newUser.address!.suite" placeholder="Suite" required />
-        <input type="text" id="city" name="city" class="form-control mt-2" [(ngModel)]="newUser.address!.city" placeholder="City" required />
-        <input type="text" id="zipcode" name="zipcode" class="form-control mt-2" [(ngModel)]="newUser.address!.zipcode" placeholder="Zipcode" required />
-      </div>
-      <div class="mb-3">
-        <label for="company" class="form-label">Company</label>
-        <input type="text" id="company" name="company" class="form-control" [(ngModel)]="newUser.company!.name" placeholder="Company Name" required />
-      </div>
-      <div class="d-grid">
-        <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Create User</button>
-      </div>
-    </form>
+    </div>
+
+    <!-- Address Fields -->
+    <div formGroupName="address" class="mb-3">
+      <label class="form-label">Address</label>
+      <input 
+        type="text" 
+        formControlName="street" 
+        class="form-control mb-2" 
+        placeholder="Street">
+      <input 
+        type="text" 
+        formControlName="suite" 
+        class="form-control mb-2" 
+        placeholder="Suite">
+      <input 
+        type="text" 
+        formControlName="city" 
+        class="form-control mb-2" 
+        placeholder="City">
+      <input 
+        type="text" 
+        formControlName="zipcode" 
+        class="form-control" 
+        placeholder="Zipcode">
+    </div>
+
+    <!-- Company Field -->
+    <div formGroupName="company" class="mb-3">
+      <label for="companyName" class="form-label">Company Name</label>
+      <input 
+        type="text" 
+        id="companyName" 
+        formControlName="name" 
+        class="form-control" 
+        placeholder="Enter company name">
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary" [disabled]="newUserForm.invalid">
+        Create User
+      </button>
+    </div>
+  </form>
+
+  <!-- Success Message Display -->
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
   </div>
+</div>
