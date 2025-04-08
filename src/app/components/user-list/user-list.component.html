@@ -1,0 +1,40 @@
+<div class="container my-5">
+    <h1 class="text-center mb-4">User Dashboard</h1>
+    <!-- Search Bar -->
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name or email"
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+    <!-- Create User Button -->
+    <div class="mb-3 text-end">
+      <button class="btn btn-primary" (click)="goToCreate()">Create New User</button>
+    </div>
+    <!-- User Table -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers()">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewDetails(user.id)">View Details</button>
+            <!-- Edit Button -->
+            <button class="btn btn-warning btn-sm me-2" (click)="editUser(user)">Edit</button>
+            <button class="btn btn-danger btn-sm ms-2" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,15 @@
+<div class="container my-5" *ngIf="user">
+    <h1 class="mb-4">User Details</h1>
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Name:</strong> {{ user.name }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+      <li class="list-group-item"><strong>Phone:</strong> {{ user.phone }}</li>
+      <li class="list-group-item" *ngIf="user.address">
+        <strong>Address:</strong>
+        {{ user.address.street }}, {{ user.address.suite }}, {{ user.address.city }}, {{ user.address.zipcode }}
+      </li>
+      <li class="list-group-item" *ngIf="user.company">
+        <strong>Company:</strong> {{ user.company.name }} - {{ user.company.catchPhrase }}
+      </li>
+    </ul>
+  </div>

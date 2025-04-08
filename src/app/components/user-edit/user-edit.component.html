@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <h2>Edit User</h2>
+    <!-- Display the form only when user data is loaded -->
+    <form *ngIf="user" (ngSubmit)="updateUser()" #editUserForm="ngForm">
+      <!-- Name Field -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="name" class="form-control" [(ngModel)]="user.name" required>
+      </div>
+      <!-- Email Field -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email" required>
+      </div>
+      <!-- Phone Field -->
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="user.phone">
+      </div>
+      <!-- Address Fields (if available) -->
+      <div *ngIf="user.address">
+        <div class="mb-3">
+          <label for="street" class="form-label">Street</label>
+          <input type="text" id="street" name="street" class="form-control" [(ngModel)]="user.address.street" placeholder="Street" required>
+        </div>
+        <div class="mb-3">
+          <label for="suite" class="form-label">Suite</label>
+          <input type="text" id="suite" name="suite" class="form-control mt-2" [(ngModel)]="user.address.suite" placeholder="Suite" required>
+        </div>
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input type="text" id="city" name="city" class="form-control mt-2" [(ngModel)]="user.address.city" placeholder="City" required>
+        </div>
+        <div class="mb-3">
+          <label for="zipcode" class="form-label">Zipcode</label>
+          <input type="text" id="zipcode" name="zipcode" class="form-control mt-2" [(ngModel)]="user.address.zipcode" placeholder="Zipcode" required>
+        </div>
+      </div>
+      <!-- Company Field (if available) -->
+      <div class="mb-3" *ngIf="user.company">
+        <label for="companyName" class="form-label">Company Name</label>
+        <input type="text" id="companyName" name="companyName" class="form-control" [(ngModel)]="user.company.name" placeholder="Company Name" required>
+      </div>
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="editUserForm.invalid">Update User</button>
+    </form>
+    <!-- Loading Message -->
+    <div *ngIf="!user">
+      <p>Loading user data...</p>
+    </div>
+  </div>
+  
