@@ -8,8 +8,21 @@ export const routes: Routes = [
   { path: '', redirectTo: 'users', pathMatch: 'full' },
   { path: 'users', component: UserListComponent },
   { path: 'users/create', component: UserCreateComponent },
-  { path: 'users/:id', component: UserDetailComponent },
+  {
+    path: 'users/:id',
+    component: UserDetailComponent,
+    data: {
+      getPrerenderParams: () => {
+        return [
+          { id: '1' },
+          { id: '2' },
+          { id: '3' },
+          { id: '4' },
+          { id: '5' }
+        ];
+      }
+    }
+  },
   { path: 'edit/:id', component: UserEditComponent },
   { path: '**', redirectTo: 'users' }
 ];
-
